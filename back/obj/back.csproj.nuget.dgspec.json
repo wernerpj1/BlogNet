@@ -1,0 +1,73 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/riddle/workspace/Blog/back/back.csproj": {}
+  },
+  "projects": {
+    "/home/riddle/workspace/Blog/back/back.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/riddle/workspace/Blog/back/back.csproj",
+        "projectName": "back",
+        "projectPath": "/home/riddle/workspace/Blog/back/back.csproj",
+        "packagesPath": "/home/riddle/.nuget/packages/",
+        "outputPath": "/home/riddle/workspace/Blog/back/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/riddle/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.12, )"
+            },
+            "Microsoft.EntityframeworkCore": {
+              "target": "Package",
+              "version": "[5.0.12, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/snap/dotnet-sdk/120/sdk/5.0.202/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
