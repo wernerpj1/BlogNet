@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/riddle/workspace/Blog/back/back.csproj": {}
+    "/home/riddle/workspace/BlogNet/back/back.csproj": {}
   },
   "projects": {
-    "/home/riddle/workspace/Blog/back/back.csproj": {
+    "/home/riddle/workspace/BlogNet/back/back.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/riddle/workspace/Blog/back/back.csproj",
+        "projectUniqueName": "/home/riddle/workspace/BlogNet/back/back.csproj",
         "projectName": "back",
-        "projectPath": "/home/riddle/workspace/Blog/back/back.csproj",
+        "projectPath": "/home/riddle/workspace/BlogNet/back/back.csproj",
         "packagesPath": "/home/riddle/.nuget/packages/",
-        "outputPath": "/home/riddle/workspace/Blog/back/obj/",
+        "outputPath": "/home/riddle/workspace/BlogNet/back/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/riddle/.nuget/NuGet/NuGet.Config"
@@ -38,13 +38,21 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
-            "Microsoft.EntityFrameworkCore.SqlServer": {
+            "Microsoft.AspNetCore.Authentication": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[5.0.12, )"
             },
-            "Microsoft.EntityframeworkCore": {
+            "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[5.0.12, )"
+              "version": "[5.6.3, )"
+            },
+            "Swashbuckle.AspNetCore.Annotations": {
+              "target": "Package",
+              "version": "[6.2.3, )"
             }
           },
           "imports": [
