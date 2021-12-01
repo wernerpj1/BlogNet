@@ -12,7 +12,5 @@ namespace back.Business.Entities
         public string SlugSubCategoria { get; set; }
         public int IdCategoria { get; set; }
         public virtual Categoria Categoria { get; set; }
-        public int IdImagem { get; set; }
-        public virtual Imagens Imagens { get; set; }
     }
 }
