@@ -1,7 +1,6 @@
-using System;
+using back.Business.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using back.Business.Entities;
 
 namespace back.Infrastructure.Data.Mappings
 {

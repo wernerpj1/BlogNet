@@ -1,14 +1,19 @@
 
-using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
+using back.Business.Entities;
 using back.Filters;
+using back.Infrastructure.Data;
 using back.ViewModels;
 using back.ViewModels.UsersViews;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Annotations;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace back.Controllers
 {
@@ -61,6 +66,24 @@ namespace back.Controllers
        [ValidaCampoFilter]
        public IActionResult Registrar(RegistrarViewInput registrarViewInput)
        {
+            var optionsBuilder = new DbContextOptionsBuilder<ArtigoDbContext>();
+            optionsBuilder.UseSqlServer("Server=desktop-2dvh51e\\sqlexpress; Database= Blog; user= riddle; password = Deusminhavida2403");
+            ArtigoDbContext contexto = new ArtigoDbContext(optionsBuilder.Options);
+
+            var pendentMigrations = contexto.Database.GetPendingMigrations();
+            if(pendentMigrations.Count() > 0)
+            {
+                contexto.Database.Migrate();
+            }
+
+            var usuario = new Usuario();
+
+            usuario.Email = registrarViewInput.Email;
+            usuario.Senha = registrarViewInput.Senha;
+            usuario.Active = false;
+            usuario.Excluido = false;
+            contexto.Usuario.Add(usuario);
+            contexto.SaveChanges();
            return Created("", registrarViewInput);
        } 
     }

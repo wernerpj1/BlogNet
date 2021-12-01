@@ -1,12 +1,12 @@
 
-using System.Collections.Generic;
-using System.Security.Claims;
-using System.Threading.Tasks;
 using back.Filters;
 using back.ViewModels;
 using back.ViewModels.PostsViews;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace back.Controllers
 {
