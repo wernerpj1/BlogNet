@@ -1,11 +1,16 @@
 
 using back.Business.Entities;
+using back.Business.Repositories;
+using back.Configurations;
 using back.Filters;
 using back.Infrastructure.Data;
+using back.Infrastructure.Data.Repositories;
 using back.ViewModels;
 using back.ViewModels.UsersViews;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
@@ -21,9 +26,18 @@ namespace back.Controllers
     [Route("api/v1/[controller]")]
     public class Users : ControllerBase
     {
-        
+        private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IAuthenticationService _authentication;
 
-        [SwaggerResponse(statusCode: 200, description: "Sucesso ao autenticar", Type = typeof(LoginViewOutput))]
+        public Users(IUsuarioRepository usuarioRepository,
+                     IAuthenticationService authentication)
+        {
+            _usuarioRepository = usuarioRepository;
+            _authentication = authentication;
+        }
+
+        [Authorize]
+       [SwaggerResponse(statusCode: 200, description: "Sucesso ao autenticar", Type = typeof(LoginViewOutput))]
        [SwaggerResponse(statusCode: 400, description: "Campos obrigatórios preenchidos incorretamente", Type = typeof(ErrosCamposView))]
        [SwaggerResponse(statusCode: 500, description: "Erro interno", Type = typeof(ErroGenericoView))]
        [HttpPost]
@@ -36,29 +50,30 @@ namespace back.Controllers
                Id = 1,
                Email = "wernerpj@live.com",
            };
-           var secret = Encoding.ASCII.GetBytes("MaisUmaSenha24@3");
-           var symmetricSecurityKey = new SymmetricSecurityKey(secret); 
-           var securityTokenDescriptor = new SecurityTokenDescriptor
-           {
-               Subject = new ClaimsIdentity(new Claim[]
-               {
-                   new Claim(ClaimTypes.NameIdentifier, usuarioViewModelOutput.Id.ToString()),
-                   new Claim(ClaimTypes.Email, usuarioViewModelOutput.Email.ToString())
-               }),
-               Expires = DateTime.UtcNow.AddDays(1),
-               SigningCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256Signature)
-           };
-           var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
-           var tokenGenerated = jwtSecurityTokenHandler.CreateToken(securityTokenDescriptor);
-          
-           var token = jwtSecurityTokenHandler.WriteToken(tokenGenerated);
-           return Ok(new {
+         //  var secret = Encoding.ASCII.GetBytes(_configuration.GetSection("JwtConfigurations:Secret").Value);
+         //  var symmetricSecurityKey = new SymmetricSecurityKey(secret); 
+         //  var securityTokenDescriptor = new SecurityTokenDescriptor
+         //  {
+         //      Subject = new ClaimsIdentity(new Claim[]
+         //      {
+         //          new Claim(ClaimTypes.NameIdentifier, usuarioViewModelOutput.Id.ToString()),
+         //          new Claim(ClaimTypes.Email, usuarioViewModelOutput.Email.ToString())
+         //      }),
+         //      Expires = DateTime.UtcNow.AddDays(1),
+         //      SigningCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256Signature)
+         //  };
+         //  var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+         //  var tokenGenerated = jwtSecurityTokenHandler.CreateToken(securityTokenDescriptor);
+         //  var token = jwtSecurityTokenHandler.WriteToken(tokenGenerated);
+
+            var token = _authentication.GerarToken(usuarioViewModelOutput);
+
+            return Ok(new {
                Token = token,
                Usuario = usuarioViewModelOutput
            });
        } 
-
-       [SwaggerResponse(statusCode: 200, description: "Sucesso ao autenticar", Type = typeof(LoginViewOutput))]
+       [SwaggerResponse(statusCode: 201, description: "Sucesso ao autenticar", Type = typeof(LoginViewOutput))]
        [SwaggerResponse(statusCode: 400, description: "Campos obrigatórios preenchidos incorretamente", Type = typeof(ErrosCamposView))]
        [SwaggerResponse(statusCode: 500, description: "Erro interno", Type = typeof(ErroGenericoView))]
        [HttpPost]
@@ -66,15 +81,15 @@ namespace back.Controllers
        [ValidaCampoFilter]
        public IActionResult Registrar(RegistrarViewInput registrarViewInput)
        {
-            var optionsBuilder = new DbContextOptionsBuilder<ArtigoDbContext>();
-            optionsBuilder.UseSqlServer("Server=desktop-2dvh51e\\sqlexpress; Database= Blog; user= riddle; password = Deusminhavida2403");
-            ArtigoDbContext contexto = new ArtigoDbContext(optionsBuilder.Options);
+          //  var optionsBuilder = new DbContextOptionsBuilder<ArtigoDbContext>();
+          //  optionsBuilder.UseSqlServer("Server=desktop-2dvh51e\\sqlexpress; Database= Blog; user= riddle; password = Deusminhavida2403");
+          //  ArtigoDbContext contexto = new ArtigoDbContext(optionsBuilder.Options);
 
-            var pendentMigrations = contexto.Database.GetPendingMigrations();
-            if(pendentMigrations.Count() > 0)
-            {
-                contexto.Database.Migrate();
-            }
+          //  var pendentMigrations = contexto.Database.GetPendingMigrations();
+          //  if (pendentMigrations.Count() > 0)
+          //  {
+          //      contexto.Database.Migrate();
+          //  }
 
             var usuario = new Usuario();
 
@@ -82,8 +97,11 @@ namespace back.Controllers
             usuario.Senha = registrarViewInput.Senha;
             usuario.Active = false;
             usuario.Excluido = false;
-            contexto.Usuario.Add(usuario);
-            contexto.SaveChanges();
+            
+            _usuarioRepository.Adicionar(usuario);
+            _usuarioRepository.Commit();
+
+
            return Created("", registrarViewInput);
        } 
     }
