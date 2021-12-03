@@ -10,7 +10,7 @@ namespace back.Configurations
         public ArtigoDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<ArtigoDbContext>();
-            optionsBuilder.UseSqlServer("Server=desktop-2dvh51e\\sqlexpress; Database= Blog; user= riddle; password = Deusminhavida2403");
+            optionsBuilder.UseSqlServer("Server=localhost; Database= Blog; user = riddle; password = verni");
             ArtigoDbContext contexto = new ArtigoDbContext(optionsBuilder.Options);
 
             return contexto;

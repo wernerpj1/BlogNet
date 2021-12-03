@@ -3,22 +3,11 @@ using back.Business.Entities;
 using back.Business.Repositories;
 using back.Configurations;
 using back.Filters;
-using back.Infrastructure.Data;
-using back.Infrastructure.Data.Repositories;
 using back.ViewModels;
 using back.ViewModels.UsersViews;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Annotations;
-using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace back.Controllers
 {

@@ -2,6 +2,7 @@
 using System;
 using System.Text;
 using back.Business.Repositories;
+using back.Configurations;
 using back.Infrastructure.Data;
 using back.Infrastructure.Data.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -83,6 +84,7 @@ namespace back
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IAuthenticationService, JwtService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
