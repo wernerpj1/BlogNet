@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Infrastructure\Data\Repositories\ImagemRepository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.12" />
@@ -20,6 +24,10 @@
 
   <ItemGroup>
     <Folder Include="Business\Entities\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Infrastructure\Data\Repositories\ImagemRepository.cs" />
   </ItemGroup>
 
 </Project>

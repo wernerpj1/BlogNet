@@ -3,23 +3,21 @@ using back.Business.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace back.Infrastructure.Data.Repositories
 {
-    public class UsuarioRepository : IUsuarioRepository
+    public class ArtigoRepository : IArtigoRepository
     {
         private readonly ArtigoDbContext _contexto;
 
-        public UsuarioRepository(ArtigoDbContext contexto)
+        public ArtigoRepository(ArtigoDbContext contexto)
         {
             _contexto = contexto;
         }
 
-        public void Adicionar(Usuario usuario)
+        public void Adicionar(Artigo artigo)
         {
-            _contexto.Usuario.Add(usuario);
-            
+            _contexto.Artigo.Add(artigo);
         }
 
         public void Commit()
@@ -27,11 +25,9 @@ namespace back.Infrastructure.Data.Repositories
             _contexto.SaveChanges();
         }
 
-        public Usuario ObterUsuario(string email)
+        public IList<Artigo> ObterPorUsuario(int usuarioId)
         {
-            return _contexto.Usuario.FirstOrDefault(u => u.Email == email);
+            return _contexto.Artigo.Where(w => w.UsuarioId == usuarioId).ToList();
         }
-
-        
     }
 }

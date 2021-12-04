@@ -28,5 +28,6 @@ namespace back.Infrastructure.Data
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Artigo> Artigo { get; set; }
     }
 }

@@ -6,5 +6,6 @@ namespace back.Business.Repositories
     {
         void Adicionar(Usuario usuario);
         void Commit();
+        Usuario ObterUsuario(string email);
     }
 }
