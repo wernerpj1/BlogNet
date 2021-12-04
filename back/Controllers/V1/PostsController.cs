@@ -33,9 +33,9 @@ namespace back.Controllers
         {
             Artigo artigo = new Artigo();
             Imagens imagens = new Imagens();
+            
             artigo.Titulo = listaViewInput.Titulo;
             imagens.SlugImagem = listaViewInput.Imagens;
-            var categoria = 
             var codigoUsuario = int.Parse(User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value);
             return Created("", listaViewInput);
         }
