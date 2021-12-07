@@ -1,3 +1,5 @@
+using back.ViewModels.ImagensView;
+
 namespace back.ViewModels.PostsViews
 {
     public class ListaViewInput
@@ -6,7 +8,7 @@ namespace back.ViewModels.PostsViews
         public string Titulo { get; set; }
         public string Texto { get; set; } 
         public string Categoria { get; set; }
-        public string Imagens { get; set; }
+        public ImagensViewInput Imagens { get; set; }
         
     }
 }

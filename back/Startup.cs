@@ -85,6 +85,7 @@ namespace back
             });
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IAuthenticationService, JwtService>();
+            services.AddScoped<IArtigoRepository, ArtigoRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
