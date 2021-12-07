@@ -36,9 +36,15 @@ namespace back.Controllers
         {
             Artigo artigo = new Artigo();
             Imagens imagens = new Imagens();
+<<<<<<< HEAD
             artigo.Imagens.SlugImagem = listaViewInput.Imagens.SlugImagem;
             artigo.Titulo = listaViewInput.Titulo;
             artigo.SubcategoriaId = int.Parse(listaViewInput.Categoria);
+=======
+            
+            artigo.Titulo = listaViewInput.Titulo;
+            imagens.SlugImagem = listaViewInput.Imagens;
+>>>>>>> fb8ca20cdb9b75abd76f6a7034d5299a6d2ddc77
             var codigoUsuario = int.Parse(User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value);
             artigo.UsuarioId = codigoUsuario;
             _imagemRepository.Adicionar(imagens);
